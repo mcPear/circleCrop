@@ -34,7 +34,7 @@ public class Main {
             BufferedImage bufferedImage = ImageIO.read(path.toFile());
             Point faceCenter = faceCenter(bufferedImage);
             bufferedImage = square(bufferedImage, faceCenter);
-//            bufferedImage = cropToCircle(bufferedImage);
+            bufferedImage = cropToCircle(bufferedImage);
             bufferedImage = resize(bufferedImage);
             ImageIO.write(bufferedImage, "PNG", new File(path.toString().substring(0, path.toString().length() - 4) + "_THUMBNAIL.png"));
         } catch (IOException e) {
@@ -90,7 +90,7 @@ public class Main {
         return Thumbnails.of(bufferedImage).size(newGreaterDim, newGreaterDim).asBufferedImage();
     }
 
-    private static BufferedImage cropToCircle(BufferedImage bufferedImage) throws IOException {
+    private static BufferedImage cropToCircle(BufferedImage bufferedImage) {
         int diameter = bufferedImage.getWidth();
         BufferedImage circleBuffer = new BufferedImage(diameter, diameter, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = circleBuffer.createGraphics();
